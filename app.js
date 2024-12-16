@@ -10,9 +10,12 @@ function sortear() {
         x = parseInt(Math.random() *numeroMaximo + 1 );
         if (x >= numeroMinimo) {
             numerosSorteados.push(x);
+        } else{
+            index --;
         }
     }
     textoNaTela(`Números sorteados: ${numerosSorteados}`);
+    numerosSorteados = [];
 }
 
 function textoNaTela(texto){
@@ -20,6 +23,16 @@ function textoNaTela(texto){
     texto_final.innerHTML = texto;
 }
 
-function reiniciar(){
+function limparCampos() {
+    let quantidadeDeNumeros = document.getElementById('quantidade');
+    quantidadeDeNumeros.value = '';
+    let numeroMinimo = document.getElementById('de');
+    numeroMinimo.value = '';
+    let numeroMaximo = document.getElementById('ate');
+    numeroMaximo.value = '';
+}
 
+function reiniciar(){
+    limparCampos();
+    textoNaTela('Números sorteados:  nenhum até agora');
 }
