@@ -2,7 +2,7 @@
 
 Este é um projeto de um **sorteador de números**, desenvolvido para gerar números aleatórios dentro de um intervalo definido pelo usuário.
 
-![Screenshot do projeto](img\screenshot.png)
+![Screenshot do projeto]([img\screenshot.png](https://github.com/Guilherme-27/sorteador-numeros/blob/main/img/screenshot.png))
 
 ## 🚀 Funcionalidades
 
