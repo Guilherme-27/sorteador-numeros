@@ -1,38 +1,53 @@
-let numerosSorteados = [];
-
 function sortear() {
-    // Variáveis = valores colocados pelo usuário
-    let quantidadeDeNumeros = document.getElementById('quantidade').value;
-    let numeroMinimo = document.getElementById('de').value;
-    let numeroMaximo = document.getElementById('ate').value;
-    // Loop para sortear os números e colocar na lista numerosSorteados
-    for (let index = 0; index < quantidadeDeNumeros; index++) {
-        x = parseInt(Math.random() *numeroMaximo + 1 );
-        if (x >= numeroMinimo) {
-            numerosSorteados.push(x);
-        } else{
-            index --;
+    let quantidade = parseInt(document.getElementById('quantidade').value);
+    let de = parseInt(document.getElementById('de').value);
+    let ate = parseInt(document.getElementById('ate').value);
+    //Verifica se o numero 'de' é menor que o número 'até'
+    if (ate >= de) {
+        //Verifica se a quantidade de números a ser sorteado é compatível com o intervalo dos números
+        if (quantidade <= (ate-de)+1){
+            //Loop para preencher uma lista de números sorteados
+        let numerosSorteados = [];
+        for (let index = 0; index < quantidade; index++) {
+            let numero = obterNumeroAleatorio(de, ate);
+            while (numerosSorteados.includes(numero)) {
+                numero = obterNumeroAleatorio(de, ate);
+            }
+            numerosSorteados.push(numero);
         }
+    textoResultados(`Números sorteados: ${numerosSorteados}`);
+    //Ativa o botão reiniciar
+    document.getElementById('btn-reiniciar').setAttribute('class', 'container__botao');
+        } else{
+            alert('Campo "Quantidade" deve ser menor ou igual ao intervalo informado no campo "Do número" até o campo "Até o número". Verifique!');
+        }
+        
+    } else {
+        alert('Campo "Do número" deve ser inferior ao campo "Até o número". Verifique!');
     }
-    textoNaTela(`Números sorteados: ${numerosSorteados}`);
-    numerosSorteados = [];
 }
 
-function textoNaTela(texto){
-    let texto_final = document.getElementById('resultado');
-    texto_final.innerHTML = texto;
+function obterNumeroAleatorio(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function textoResultados(texto){
+    let elemento = document.getElementById('resultado');
+    elemento.innerHTML = texto;
 }
 
 function limparCampos() {
-    let quantidadeDeNumeros = document.getElementById('quantidade');
-    quantidadeDeNumeros.value = '';
-    let numeroMinimo = document.getElementById('de');
-    numeroMinimo.value = '';
-    let numeroMaximo = document.getElementById('ate');
-    numeroMaximo.value = '';
+    let quantidade = document.getElementById('quantidade');
+    quantidade.value = '';
+    let de = document.getElementById('de');
+    de.value = '';
+    let ate = document.getElementById('ate');
+    ate.value = '';
 }
 
 function reiniciar(){
     limparCampos();
-    textoNaTela('Números sorteados:  nenhum até agora');
+    //Desativa o botão reiniciar
+    document.getElementById('btn-reiniciar').setAttribute('class', 'container__botao-desabilitado');
+    textoResultados('Números sorteados:  nenhum até agora');
 }
